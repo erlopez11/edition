@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section>
+    <h1>Sign In</h1>
+    <form action="{% url "signin" %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="hidden" name="next" value="{{ next }}" />
+        <button type="submit">Login</button>
+    </form>
+</section>
+{% endblock %}
