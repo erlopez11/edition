@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
@@ -46,3 +46,11 @@ class EditionCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+    
+class EditionUpdate(LoginRequiredMixin, UpdateView):
+    model = Edition
+    fields = ['edition_name', 'year', 'edition_size', 'paper_size', 'plate_size', 'technique', 'margin_upper', 'margin_lower', 'margin_sides', 'available_prints', 'status', 'edition_type']
+
+class EditionDelete(LoginRequiredMixin, DeleteView):
+    model = Edition
+    success_url = '/editions/'

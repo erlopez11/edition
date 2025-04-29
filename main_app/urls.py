@@ -9,5 +9,7 @@ urlpatterns = [
     path('editions/', views.EditionsList.as_view(), name='editions_index'),
     path('editions/<int:pk>/', views.EditionDetail.as_view(), name='edition_detail'),
     path('editions/create/', views.EditionCreate.as_view(), name='edition_create'),
+    path('editions/<int:pk>/update/', views.EditionUpdate.as_view(), name='edition_update'),
+    path('editions/<int:pk>/delete/', views.EditionDelete.as_view(), name='edition_delete'),
 ]
 
