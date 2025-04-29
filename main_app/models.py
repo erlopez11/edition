@@ -38,13 +38,13 @@ class Edition(models.Model):
     edition_size = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     paper_size = models.CharField(max_length=100)
     plate_size = models.CharField(max_length=100)
-    technique = models.CharField(choices=TECHNIQUES, default=[0][0])
+    technique = models.CharField(choices=TECHNIQUES, default=TECHNIQUES[0][0])
     margin_upper = models.CharField(max_length=100)
     margin_lower = models.CharField(max_length=100)
     margin_sides = models.CharField(max_length=100)
     available_prints = models.CharField(max_length=50)
-    status = models.CharField(choices=[0][0])
-    edition_type = models.CharField(choices=[0][0])
+    status = models.CharField(choices=STATUS, default=STATUS[0][0])
+    edition_type = models.CharField(choices=EDITION_TYPE, default=EDITION_TYPE[0][0])
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
