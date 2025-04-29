@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static "confirm-delete.css" %}">
+{% endblock %}
+
+{% block content %}
+<div class="delete-header">
+    <h1>Delete Edition?</h1>
+</div>
+<div class="confirm-container">
+    <h2>Are you sure you want to delete {{edition.edition_name}}</h2>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <a href="{% url "edition_detail" edition.id %}">Cancel</a>
+        <button type="submit">Delete {{edition.edition_name}}</button>
+    </form>
+</div>
+{% endblock %}
