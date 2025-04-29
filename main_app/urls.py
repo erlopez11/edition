@@ -8,5 +8,6 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('editions/', views.EditionsList.as_view(), name='editions_index'),
     path('editions/<int:pk>/', views.EditionDetail.as_view(), name='edition_detail'),
+    path('editions/create/', views.EditionCreate.as_view(), name='edition_create'),
 ]
 
