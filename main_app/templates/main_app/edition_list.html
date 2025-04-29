@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static "css/editions/editions-index.css" %}">
+{% endblock %}
+
+{% block content %}
+<div class="editions-index-header">
+    <h1>Editions</h1>
+    <a href="">Add Edition</a>
+</div>
+<section>
+    {% for edition in edition_list %}
+        <div class='card'>
+            <a href="{% url "edition_detail" edition.id %}">
+                <h2>{{edition.edition_name}}</h2>
+            </a>
+        </div>
+    {% endfor %}
+</section>
+{% endblock %}
