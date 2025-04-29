@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static "form.css" %}">
+{% endblock %}
+
+{% block content %}
+<div class="edition-form-header">
+    {% if edition %}
+        <h1>Edition Edition</h1>
+    {% else %}
+        <h1>Add A New Edition</h1>
+    {% endif %}
+</div>
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+    {% if edition %}
+        <button type="submit">Update Edition</button>
+    {% else %}
+        <button type="submit">Add Edition</button>
+    {% endif %}
+</form>
+{% endblock %}
