@@ -12,8 +12,8 @@
             <h1>Edition Name</h1>
             <p><span>Edition Status:</span>{{edition.get_status_display}}</p>
             <div class="edition-actions">
-                <a href="">Edit Edition</a>
-                <a href="">Delete Edition</a>
+                <a href="{% url "edition_update" edition.id %}">Edit Edition</a>
+                <a href="{% url "edition_delete" edition.id %}">Delete Edition</a>
             </div>
         </div>
         <hr class="detail-divider">
