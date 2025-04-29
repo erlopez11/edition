@@ -7,6 +7,10 @@
 
 {% block content %}
 <section class="edition-detail">
+    <div class="edition-img">
+        {% load cloudinary %}
+        {% cloudinary edition.image width=200 height=200 %}
+    </div>
     <div class="edition-text">
         <div class="text-header">
             <h1>Edition Name</h1>
