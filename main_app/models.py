@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
+from cloudinary.models import CloudinaryField
 
 TECHNIQUES = (
     ('sp', 'Screenprint'),
@@ -35,6 +36,7 @@ EDITION_TYPE = (
 
 class Edition(models.Model):
     edition_name = models.CharField(max_length=200)
+    image = CloudinaryField('image')
     year = models.PositiveIntegerField(validators=[MinValueValidator(1900)])
     edition_size = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     paper_size = models.CharField(max_length=100)
