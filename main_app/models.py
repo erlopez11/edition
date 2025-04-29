@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 
@@ -49,5 +50,8 @@ class Edition(models.Model):
 
     def __str__(self):
         return self.edition_name
+    def get_absolute_url(self):
+        return reverse("edition_detail", kwargs={"pk": self.id})
+    
     
 
