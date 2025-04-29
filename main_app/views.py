@@ -6,6 +6,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Edition
+from .forms import EditionForm
 
 def home(request):
     return render(request, 'home.html')
@@ -41,16 +42,17 @@ class  EditionDetail(LoginRequiredMixin, DetailView):
     model = Edition
 
 class EditionCreate(LoginRequiredMixin, CreateView):
+    form_class = EditionForm
     model = Edition
-    fields = ['edition_name', 'year', 'edition_size', 'paper_size', 'plate_size', 'technique', 'margin_upper', 'margin_lower', 'margin_sides', 'available_prints', 'status', 'edition_type']
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
     
 class EditionUpdate(LoginRequiredMixin, UpdateView):
+    form_class = EditionForm
     model = Edition
-    fields = ['edition_name', 'year', 'edition_size', 'paper_size', 'plate_size', 'technique', 'margin_upper', 'margin_lower', 'margin_sides', 'available_prints', 'status', 'edition_type']
-
+    
 class EditionDelete(LoginRequiredMixin, DeleteView):
     model = Edition
     success_url = '/editions/'
