@@ -19,7 +19,7 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="">Editions</a></li>
+                    <li><a href="{% url "editions_index" %}">Editions</a></li>
                     <li><a href="">Inks</a></li>
                     <li><a href="">Papers</a></li>
                     <li>
@@ -39,5 +39,8 @@
         {% block content %}
         {% endblock %}
     </main>
+    <footer>
+        <h3>Edition</h3>
+    </footer>
 </body>
 </html>
