@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static "css/about.css" %}">
+{% endblock %}
+
+{% block content %}
+<section class="about-hero">
+    <div class="hero-text">
+        <h1>Edition</h1>
+        <h3>A Printmaker's Archive</h3>
+        <p>Edition is an all in one print edition manager designed and developed especially for printmakers. With Edition, you can have a digital tool to manage all your edition information. Keep organized so you can focus on printmaking.</p>
+        <a href="{% url "signup" %}">Get Started</a>
+    </div>
+</section>
+<section class="about-features">
+    <h2>Edition's Features</h2>
+    <ul>
+        <li>
+            <p> Organize important edition information</p>
+        </li>
+        <li>
+            <p>Keep track of ink and paper collections</p>
+        </li>
+        <li>
+            <p>View all your editions in on place</p>
+        </li>
+    </ul>
+</section>
+<section class="about-cta">
+    <h2>Join Editoin</h2>
+    <p>Join edition and start organizing your print archive today.</p>
+    <a href="{% url "signup" %}">Get Started</a>
+</section>
+{% endblock %}
