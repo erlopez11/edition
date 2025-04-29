@@ -121,7 +121,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-LOGIN_REDIRECT_URL = 'edition_index'
+LOGIN_REDIRECT_URL = 'editions_index'
 
 LOGOUT_REDIRECT_URL = 'home'
 
