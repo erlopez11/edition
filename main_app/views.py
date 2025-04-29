@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
+from django.views.generic import DetailView, ListView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from django.http import HttpResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Edition
 
 def home(request):
     return render(request, 'home.html')
@@ -27,3 +29,12 @@ def signup(request):
 
 def about(request):
     return render(request, 'about.html')
+
+class EditionsList(LoginRequiredMixin, ListView):
+    model = Edition
+    def get_queryset(self):
+        return Edition.objects.filter(user=self.request.user)
+    
+
+class  EditionDetail(LoginRequiredMixin, DetailView):
+    model = Edition
