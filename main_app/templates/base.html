@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edition</title>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <div>
+            <h2>Edition</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="">Editions</a></li>
+                    <li><a href="">Inks</a></li>
+                    <li><a href="">Papers</a></li>
+                    <li>
+                        <form action="{% url "logout" %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Log Out</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url "signin" %}">Sign In</a></li>
+                    <li><a href="{% url "signup" %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
