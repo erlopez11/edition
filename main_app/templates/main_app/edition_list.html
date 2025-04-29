@@ -8,7 +8,7 @@
 {% block content %}
 <div class="editions-index-header">
     <h1>Editions</h1>
-    <a href="">Add Edition</a>
+    <a href="{% url "edition_create" %}">Add Edition</a>
 </div>
 <section>
     {% for edition in edition_list %}
