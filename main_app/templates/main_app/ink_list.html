@@ -21,11 +21,11 @@
                 <p><span>Ink Base:</span>{{ink.get_ink_based_display}}</p>
                 <p><span>Ink Quantity:</span>{{ink.ink_qty}}</p>
                 <div class="ink-actions">
-                    <a href="">
+                    <a href="{% url "ink_update" ink.id %}">
                         <span class="material-symbols-outlined">edit</span> 
                         <span>Edit</span>
                     </a>
-                    <a href="">
+                    <a href="{% url "ink_delete" ink.id %}">
                         <span class="material-symbols-outlined">delete</span>
                         <span>Delete</span>
                     </a>
