@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static "inks/inks-index.css" %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=delete,edit" />
+{% endblock %}
+
+{% block content %}
+<div class="ink-list-header">
+    <h1>Inks</h1>
+    <a href="{% url "ink_create" %}">Add Ink</a>
+</div>
+<section>
+    {% for ink in ink_list  %}
+        <div class="card">
+            <div class="card-content">
+                <h2>{{ink.ink_name}}</h2>
+                <h3>{{ink.ink_color}}</h3>
+                <p><span>Ink Type:</span>{{ink.get_ink_type_display}}</p>
+                <p><span>Ink Base:</span>{{ink.get_ink_based_display}}</p>
+                <p><span>Ink Quantity:</span>{{ink.ink_qty}}</p>
+                <div class="ink-actions">
+                    <a href="">
+                        <span class="material-symbols-outlined">edit</span> 
+                        <span>Edit</span>
+                    </a>
+                    <a href="">
+                        <span class="material-symbols-outlined">delete</span>
+                        <span>Delete</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</section>
+{% endblock %}
