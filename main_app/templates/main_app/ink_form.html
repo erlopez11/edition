@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static "css/form.css" %}">
+{% endblock %}
+
+{% block content %}
+<div>
+    {% if ink %}
+        <h1>Edit Ink</h1>
+    {% else %}
+        <h1>Add New Ink</h1>
+    {% endif %}
+</div>
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+    {% if ink %}
+        <button type="submit">Update Ink</button>
+    {% else %}
+        <button type="submit">Add Ink</button>
+    {% endif %}
+</form>
+{% endblock %}
