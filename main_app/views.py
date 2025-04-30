@@ -99,5 +99,13 @@ class InkCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+class InkDelete(LoginRequiredMixin, DeleteView):
+    model = Ink
+    success_url = '/inks/'
+
+class InkUpdate(LoginRequiredMixin, UpdateView):
+    model = Ink
+    fields = ['ink_name', 'ink_color', 'ink_type', 'ink_based', 'ink_qty']
     
     
