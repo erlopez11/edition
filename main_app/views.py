@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 from django.contrib.auth.views import LoginView
@@ -66,5 +67,22 @@ class NoteCreate(LoginRequiredMixin, CreateView):
         new_note.edition_id = self.kwargs['edition_id']
         new_note.save()
         return redirect('edition_detail', self.kwargs['edition_id'])
-    
+
+class NoteDelete(LoginRequiredMixin, DeleteView):
+    model = Note
+
+    def get_success_url(self):
+        current_edition = self.get_object().edition.id
+
+        if current_edition:
+            return  reverse('edition_detail', kwargs={'pk':current_edition})
+        else:
+            return redirect('edition_index')
+
+class NoteUpdate(LoginRequiredMixin, UpdateView):
+    form_class = NoteForm
+    model = Note
+
+    def get_object(self, queryset = None):
+        return Note.objects.get(pk = self.kwargs['pk'])
     
