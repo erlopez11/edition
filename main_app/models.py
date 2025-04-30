@@ -63,4 +63,7 @@ class Note(models.Model):
 
     def __str__(self):
         return f'Note Date: {self.note_date}'
+    def get_absolute_url(self):
+        return reverse("edition_detail", kwargs={"pk": self.edition.id})
+    
   
