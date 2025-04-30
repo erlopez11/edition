@@ -18,5 +18,7 @@ urlpatterns = [
     path('inks/create/', views.InkCreate.as_view(), name='ink_create'),
     path('inks/delete_ink/<int:pk>/', views.InkDelete.as_view(), name='ink_delete'),
     path('inks/update_ink/<int:pk>/', views.InkUpdate.as_view(), name='ink_update'),
+    path('editions/<int:edition_id>/associate_ink/<int:ink_id>/', views.associate_ink, name='associate_ink'),
+    path('editions/<int:edition_id>/remove_ink/<int:ink_id>/', views.remove_ink, name='remove_ink'),
 ]
 

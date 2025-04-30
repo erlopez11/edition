@@ -5,6 +5,7 @@ from django.views.generic import DetailView, ListView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Edition, Note, Ink
 from .forms import EditionForm, NoteForm
@@ -41,6 +42,13 @@ class EditionsList(LoginRequiredMixin, ListView):
 
 class  EditionDetail(LoginRequiredMixin, DetailView):
     model = Edition
+
+    def get_context_data(self, **kwargs):
+        edition = self.get_object()
+        inks_available = Ink.objects.exclude(id__in = edition.ink.all().values_list('id'))
+        context = super().get_context_data(**kwargs)
+        context['ink_list'] = inks_available
+        return context
 
 class EditionCreate(LoginRequiredMixin, CreateView):
     form_class = EditionForm
@@ -107,5 +115,14 @@ class InkDelete(LoginRequiredMixin, DeleteView):
 class InkUpdate(LoginRequiredMixin, UpdateView):
     model = Ink
     fields = ['ink_name', 'ink_color', 'ink_type', 'ink_based', 'ink_qty']
+
+@login_required
+def associate_ink(request, edition_id, ink_id):
+    Edition.objects.get(id=edition_id).ink.add(ink_id)
+    return redirect('edition_detail', edition_id)
     
+@login_required
+def remove_ink(request, edition_id, ink_id):
+    Edition.objects.get(id=edition_id).ink.remove(ink_id)
+    return redirect('edition_detail', edition_id)
     
