@@ -38,4 +38,18 @@
     <p><span>Margin-Sides:</span>{{edition.margin_sides}}</p>
 
 </section>
+<section class="edition-notes">
+    <div clsas="notes-header">
+        <h2>Notes</h2>
+        <a href="{% url "note_create" edition.id %}">Add Note</a>
+    </div>
+    <div class="notes">
+        {% for note in edition.note_set.all %}
+            <div class="note-card">
+                <h4>Date: {{note.note_date}}</h4>
+                <div class="note-text">{{note.notes}}</div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}
