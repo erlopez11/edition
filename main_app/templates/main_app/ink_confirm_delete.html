@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="css/confirm-delete.css">
+{% endblock %}
+
+{% block content %}
+<div class="delete-header">
+    <h1>Delete {{ink.ink.color}} {{ink.ink_name}} ink?</h1>
+</div>
+<form action="" method="POST">
+    {% csrf_token %}
+    <a href="{% url "inks_index" %}">Cancel</a>
+    <button type="submit">Delete Ink</button>
+</form>
+{% endblock %}
