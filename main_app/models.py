@@ -61,6 +61,20 @@ class Ink(models.Model):
         return reverse("inks_index")
     
 
+class Paper(models.Model):
+    paper_name = models.CharField(max_length=200)
+    paper_color = models.CharField(max_length=100)
+    paper_size = models.CharField(max_length=100)
+    paper_weight = models.CharField(max_length=100)
+    paper_qty = models.PositiveIntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.paper_name} in {self.paper_color}'
+    def get_absolute_url(self):
+        return reverse("paper_index")
+    
+
 class Edition(models.Model):
     edition_name = models.CharField(max_length=200)
     image = CloudinaryField('image')
@@ -76,6 +90,7 @@ class Edition(models.Model):
     status = models.CharField(choices=STATUS, default=STATUS[0][0])
     edition_type = models.CharField(choices=EDITION_TYPE, default=EDITION_TYPE[0][0])
     ink = models.ManyToManyField(Ink)
+    paper = models.ManyToManyField(Paper)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
