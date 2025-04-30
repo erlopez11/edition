@@ -14,7 +14,7 @@
     </div>
     <div class="edition-text">
         <div class="text-header">
-            <h1>Edition Name</h1>
+            <h1>{{edition.edition_name}}</h1>
             <p><span>Edition Status:</span>{{edition.get_status_display}}</p>
             <div class="edition-actions">
                 <a href="{% url "edition_update" edition.id %}">Edit Edition</a>
@@ -39,6 +39,43 @@
     <p><span>Margin-Sides:</span>{{edition.margin_sides}}</p>
 
 </section>
+<section class="edition-ink">
+    <h2>Inks</h2>
+    <div class="inks">
+        <div class="inks-added">
+            {% if edition.ink.count %}
+                {% for ink in edition.ink.all %}
+                    <div class="ink-container">
+                        <h3>{{ink.ink_color}} {{ink.ink_name}} Ink</h3>
+                        <form action="{% url "remove_ink" edition.id ink.id%}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                        </form>
+                    </div>
+                {% endfor %}
+            {% else %}
+            <p>{{edition.edition_name}} doesn't have inks yet.</p>
+            {% endif %}
+        </div>
+        <div class="inks-available">
+            {% if ink_list.count %}
+                {% for ink in ink_list.all  %}
+                    <div class='ink-container'>
+                        <h3>{{ink.ink_color}} {{ink.ink_name}} Ink</h3>
+                        <form action="{% url "associate_ink" edition.id ink.id%}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit">Add Ink to Edition</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>All available inks have been added.</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
 <section class="edition-notes">
     <div clsas="notes-header">
         <h2>Notes</h2>
@@ -47,7 +84,7 @@
     <div class="notes">
         {% for note in edition.note_set.all %}
             <div class="note-card">
-                <h4>Date: {{note.note_date}}</h4>
+                <h3>Date: {{note.note_date}}</h3>
                 <div class="note-text">{{note.notes}}</div>
                 <div class="note-actions">
                     <a href="{% url "note_update" edition.id note.id %}">
