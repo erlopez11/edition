@@ -5,8 +5,8 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Edition
-from .forms import EditionForm
+from .models import Edition, Note
+from .forms import EditionForm, NoteForm
 
 def home(request):
     return render(request, 'home.html')
@@ -56,3 +56,15 @@ class EditionUpdate(LoginRequiredMixin, UpdateView):
 class EditionDelete(LoginRequiredMixin, DeleteView):
     model = Edition
     success_url = '/editions/'
+
+class NoteCreate(LoginRequiredMixin, CreateView):
+    form_class = NoteForm
+    model = Note
+
+    def form_valid(self, form):
+        new_note = form.save(commit=False)
+        new_note.edition_id = self.kwargs['edition_id']
+        new_note.save()
+        return redirect('edition_detail', self.kwargs['edition_id'])
+    
+    
