@@ -15,8 +15,7 @@ class NoteForm(ModelForm):
         fields = ['note_date', 'notes']
 
         widgets = {
-            'note_date': forms.DateInput(
-                format=('%y-%m-%d'),
+            'note_date': forms.TextInput(
                 attrs={
                     'placeholder': 'Select a date',
                     'type': 'date'
