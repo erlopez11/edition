@@ -14,5 +14,7 @@ urlpatterns = [
     path('editions/<int:edition_id>/add_note/', views.NoteCreate.as_view(), name='note_create'),
     path('editions/<int:edition_id>/delete_note/<int:pk>/', views.NoteDelete.as_view(), name='note_delete'),
     path('editions/<int:edition_id>/update_note/<int:pk>/', views.NoteUpdate.as_view(), name='note_update'),
+    path('inks/', views.InkList.as_view(), name='inks_index'),
+    path('inks/create/', views.InkCreate.as_view(), name='ink_create'),
 ]
 

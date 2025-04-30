@@ -6,7 +6,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Edition, Note
+from .models import Edition, Note, Ink
 from .forms import EditionForm, NoteForm
 
 def home(request):
@@ -85,4 +85,19 @@ class NoteUpdate(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset = None):
         return Note.objects.get(pk = self.kwargs['pk'])
+
+class InkList(LoginRequiredMixin, ListView):
+    model = Ink
+
+    def get_queryset(self):
+        return Ink.objects.filter(user=self.request.user)
+
+class InkCreate(LoginRequiredMixin, CreateView):
+    model = Ink
+    fields = ['ink_name', 'ink_color', 'ink_type', 'ink_based', 'ink_qty']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
     
