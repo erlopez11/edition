@@ -55,5 +55,12 @@ class Edition(models.Model):
     def get_absolute_url(self):
         return reverse("edition_detail", kwargs={"pk": self.id})
     
-    
 
+class Note(models.Model):
+    note_date = models.DateField()
+    notes = models.TextField()
+    edition = models.ForeignKey(Edition, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Note Date: {self.note_date}'
+  
