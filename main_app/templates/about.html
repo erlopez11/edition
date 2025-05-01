@@ -6,12 +6,12 @@
 {% endblock %}
 
 {% block content %}
-<section class="about-hero">
+<section class="about-hero container-max-width">
     <div class="hero-text">
         <h1>Edition</h1>
         <h3>A Printmaker's Archive</h3>
         <p>Edition is an all in one print edition manager designed and developed especially for printmakers. With Edition, you can have a digital tool to manage all your edition information. Keep organized so you can focus on printmaking.</p>
-        <a href="{% url "signup" %}">Get Started</a>
+        <a href="{% url "signup" %}" class="btn-accentone about-btn">Get Started</a>
     </div>
 </section>
 <section class="about-features">
@@ -28,9 +28,11 @@
         </li>
     </ul>
 </section>
-<section class="about-cta">
-    <h2>Join Editoin</h2>
-    <p>Join edition and start organizing your print archive today.</p>
-    <a href="{% url "signup" %}">Get Started</a>
+<section class="about-cta container-max-width">
+    <div class="about-cta-text">
+        <h2>Join Edition</h2>
+        <p>Join edition and start organizing your print archive today.</p>
+    </div>
+    <a href="{% url "signup" %}" class="btn-accenttwo about-btn">Get Started</a>
 </section>
 {% endblock %}
