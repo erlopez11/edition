@@ -6,15 +6,19 @@
 {% endblock %}
 
 {% block content %}
-<div class="editions-index-header">
+<div class="editions-index-header container-max-width">
     <h1>Editions</h1>
-    <a href="{% url "edition_create" %}">Add Edition</a>
+    <a href="{% url "edition_create" %}" class="btn-accentone add-edition">Add Edition</a>
 </div>
-<section>
+<hr class="divider container-max-width">
+<section class="edition-container container-max-width">
     {% for edition in edition_list %}
         <div class='card'>
             <a href="{% url "edition_detail" edition.id %}">
-                <h2>{{edition.edition_name}}</h2>
+                <div class="edition-img">
+                    {% load cloudinary %}
+                    {% cloudinary edition.image quality='auto' crop='lfill' width=300 height=300%}
+                </div>
             </a>
         </div>
     {% endfor %}
