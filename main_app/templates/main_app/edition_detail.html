@@ -76,6 +76,44 @@
         </div>
     </div>
 </section>
+<section class="edition-paper">
+    <h2>Paper</h2>
+    <div class="papers">
+        <div class="papers-added">
+            {% if edition.paper.count %}
+                {% for paper in edition.paper.all  %}
+                    <div class="paper-container">
+                        <h3>{{paper.paper_color}} {{paper.paper_name}}</h3>
+                        <form action="{% url "remove_paper" edition.id paper.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                        </form>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>{{edition.edition_name}} doesn't have paper yet.</p>
+            {% endif %}
+        </div>
+        <div class="paper-available">
+            {% if paper_list.count %}
+                {% for paper in paper_list.all  %}
+                    <div class="paper-container">
+                        <h3>{{paper.paper_color}} {{paper.paper_name}}</h3>
+                        <form action="{% url "associate_paper" edition.id paper.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit">Add Paper to Edition</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>All available paper has been added.</p>
+            {% endif %}
+        </div>
+
+    </div>
+</section>
 <section class="edition-notes">
     <div clsas="notes-header">
         <h2>Notes</h2>
