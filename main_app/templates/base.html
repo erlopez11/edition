@@ -4,18 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edition</title>
     <link rel="stylesheet" href="{% static "css/base.css" %}">
+    <script defer src="{% static "js/mobile-nav.js" %}"></script>
+    <title>Edition</title>
     {% block head %}
     {% endblock %}
 </head>
 <body>
-    <header>
+    <header class="container-max-width">
         <div>
             <h2>Edition</h2>
         </div>
+        <button class="mobile-nav-toggle" aria-expanded="false"></button>
         <nav>
-            <ul>
+            <ul class="primary-nav" data-visible="false">
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About</a></li>
                 {% if user.is_authenticated %}
@@ -25,7 +27,7 @@
                     <li>
                         <form action="{% url "logout" %}" method="post">
                             {% csrf_token %}
-                            <button type="submit">Log Out</button>
+                            <button class="logout-btn btn-accenttwo" type="submit">Log Out</button>
                         </form>
                     </li>
                 {% else %}
@@ -39,8 +41,5 @@
         {% block content %}
         {% endblock %}
     </main>
-    <footer>
-        <h3>Edition</h3>
-    </footer>
 </body>
 </html>

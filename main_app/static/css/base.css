@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&display=swap');
+
+:root {
+    /* Colors */
+    --clr-dark: #000000;
+    --clr-light: #ffffff;
+    --clr-accentOne: #648DE5;
+    --clr-accentTwo: #FF6542;
+    --clr-btnhoverOne: #85aafb;
+    --clr-btnhoverTwo: #fc9780;
+    --clr-accentOne-Faded: #BCD1FF;
+    --clr-accentTwo-Faded: #FFBFB1;
+
+    /* Font Family */
+    --ff-heading: 'Lexend', sans-serif;
+    --ff-body: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--ff-body);
+    color: var(--clr-dark);
+    min-height: 100vh;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: var(--clr-dark);
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+header h2 {
+    font-family: var(--ff-heading);
+    font-weight: bold;
+}
+
+.primary-nav a:hover {
+    color: var(--clr-accentTwo)
+}
+
+.mobile-nav-toggle {
+    display: none;
+}
+
+.logout-btn {
+    border: none;
+    padding: 8px 12px;
+}
+
+/* --------------- */
+/* Utility Classes */
+/* --------------- */
+.container-max-width {
+    --max-width: 1110px;
+    --container-padding: 1.5rem;
+    width: min(var(--max-width), 100% - var(--container-padding) * 2);
+    margin-inline: auto;
+}
+
+.btn-accentone {
+    background-color: var(--clr-accentOne);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    color: var(--clr-light);
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.btn-accentone:hover {
+    background-color: var(--clr-btnhoverOne);
+}
+
+.btn-accenttwo {
+    background-color: var(--clr-accentTwo);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    color: var(--clr-light);
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.btn-accenttwo:hover {
+    background-color: var(--clr-btnhoverTwo);
+}
+
+/* --------------- */
+/*  Media Queries  */
+/* --------------- */
+
+@media (max-width: 559px) {
+    header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+    }
+
+    .primary-nav {
+        background-color: var(--clr-accentOne-Faded);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 60px 20px;
+        gap: 12px;
+        inset: 0 0 0 30%;
+        position: fixed;
+        z-index: 1000;
+        display: none;
+    }
+
+    .mobile-nav-toggle {
+        background-image: url(../images/assets/menu.svg);
+        background-color: transparent;
+        background-repeat: none;
+        background-position: center;
+        display: block;
+        border: none;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        z-index: 2000;
+        width: 24px;
+        aspect-ratio: 1;
+    }
+
+    .primary-nav[data-visible = 'true'] {
+        display: flex;
+    }
+
+    .mobile-nav-toggle[aria-expanded = 'true'] {
+        background-image: url(../images/assets/close.svg);
+    }
+}
+
+@media (min-width: 560px) {
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+    }
+
+    .primary-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+}
