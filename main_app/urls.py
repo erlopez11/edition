@@ -20,5 +20,9 @@ urlpatterns = [
     path('inks/update_ink/<int:pk>/', views.InkUpdate.as_view(), name='ink_update'),
     path('editions/<int:edition_id>/associate_ink/<int:ink_id>/', views.associate_ink, name='associate_ink'),
     path('editions/<int:edition_id>/remove_ink/<int:ink_id>/', views.remove_ink, name='remove_ink'),
+    path('papers/', views.PaperList.as_view(), name='paper_index'),
+    path('papers/create/', views.PaperCreate.as_view(), name='paper_create'),
+    path('papers/delete_paper/<int:pk>/', views.PaperDelete.as_view(), name='paper_delete'),
+    path('papers/update_paper/<int:pk>/', views.PaperUpdate.as_view(), name='paper_update'),
 ]
 

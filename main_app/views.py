@@ -7,7 +7,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Edition, Note, Ink
+from .models import Edition, Note, Ink, Paper
 from .forms import EditionForm, NoteForm
 
 def home(request):
@@ -125,4 +125,26 @@ def associate_ink(request, edition_id, ink_id):
 def remove_ink(request, edition_id, ink_id):
     Edition.objects.get(id=edition_id).ink.remove(ink_id)
     return redirect('edition_detail', edition_id)
+
+class PaperList(LoginRequiredMixin, ListView):
+    model = Paper
+
+    def get_queryset(self):
+        return Paper.objects.filter(user=self.request.user)
+
+class PaperCreate(LoginRequiredMixin, CreateView):
+    model = Paper
+    fields = ['paper_name', 'paper_color', 'paper_size', 'paper_weight', 'paper_qty']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class PaperDelete(LoginRequiredMixin, DeleteView):
+    model = Paper
+    success_url = '/papers/'
+
+class PaperUpdate(LoginRequiredMixin, UpdateView):
+    model = Paper
+    fields = ['paper_name', 'paper_color', 'paper_size', 'paper_weight', 'paper_qty']
     
