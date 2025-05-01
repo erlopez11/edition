@@ -46,8 +46,11 @@ class  EditionDetail(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         edition = self.get_object()
         inks_available = Ink.objects.exclude(id__in = edition.ink.all().values_list('id'))
+        paper_available = Paper.objects.exclude(id__in = edition.paper.all(). values_list('id'))
         context = super().get_context_data(**kwargs)
         context['ink_list'] = inks_available
+        context['paper_list'] = paper_available
+        print(context)
         return context
 
 class EditionCreate(LoginRequiredMixin, CreateView):
@@ -147,4 +150,13 @@ class PaperDelete(LoginRequiredMixin, DeleteView):
 class PaperUpdate(LoginRequiredMixin, UpdateView):
     model = Paper
     fields = ['paper_name', 'paper_color', 'paper_size', 'paper_weight', 'paper_qty']
-    
+
+@login_required
+def associate_paper(request, edition_id, paper_id):
+    Edition.objects.get(id=edition_id).paper.add(paper_id)
+    return redirect('edition_detail', edition_id)
+
+@login_required
+def remove_paper(request, edition_id, paper_id):
+    Edition.objects.get(id=edition_id).paper.remove(paper_id)
+    return redirect('edition_detail', edition_id)

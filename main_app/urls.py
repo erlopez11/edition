@@ -24,5 +24,7 @@ urlpatterns = [
     path('papers/create/', views.PaperCreate.as_view(), name='paper_create'),
     path('papers/delete_paper/<int:pk>/', views.PaperDelete.as_view(), name='paper_delete'),
     path('papers/update_paper/<int:pk>/', views.PaperUpdate.as_view(), name='paper_update'),
+    path('editions/<int:edition_id>/associate_paper/<int:paper_id>/', views.associate_paper, name='associate_paper'),
+    path('editions/<int:edition_id>/remove_paper/<int:paper_id>/', views.remove_paper, name='remove_paper'),
 ]
 
