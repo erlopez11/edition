@@ -7,11 +7,6 @@
     font-family: var(--ff-heading);
 }
 
-.divider {
-    border-top: 2px solid var(--clr-accentTwo-Faded);
-    border-radius: 10px;
-}
-
 .add-edition {
     padding: 10px 20px;
 }

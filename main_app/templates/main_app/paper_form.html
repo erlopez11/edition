@@ -2,26 +2,30 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static "form.css" %}">
+<link rel="stylesheet" href="{% static "css/form.css" %}">
 {% endblock %}
 
 {% block content %}
-<div>
-    {% if paper %}
-        <h1>Edit {{paper.paper_name}}</h1>
-    {% else %}
-        <h1>Add New Paper</h1>
-    {% endif %}
+<div class="form-container">
+    <div class="form-info">
+        <div class="form-header">
+            {% if paper %}
+                <h1>Edit {{paper.paper_name}}</h1>
+            {% else %}
+                <h1>Add New Paper</h1>
+            {% endif %}
+        </div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table>
+                {{form.as_table}}
+            </table>
+            {% if paper %}
+                <button type="submit" class="btn-accenttwo form-btn">Update {{paper.paper_name}}</button>
+            {% else %}
+                <button type="submit" class="btn-accenttwo form-btn">Add Paper</button>
+            {% endif %}
+        </form>
+    </div>
 </div>
-<form action="" method="POST">
-    {% csrf_token %}
-    <table>
-        {{form.as_table}}
-    </table>
-    {% if paper %}
-        <button type="submit">Update {{paper.paper_name}}</button>
-    {% else %}
-        <button type="submit">Add Paper</button>
-    {% endif %}
-</form>
 {% endblock %}

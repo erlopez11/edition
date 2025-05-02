@@ -2,26 +2,30 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static "form.css" %}">
+<link rel="stylesheet" href="{% static "css/form.css" %}">
 {% endblock %}
 
 {% block content %}
-<div class="edition-form-header">
-    {% if edition %}
-        <h1>Edit Edition</h1>
-    {% else %}
-        <h1>Add A New Edition</h1>
-    {% endif %}
+<div class="form-container">
+    <div class="form-info">
+        <div class="form-header">
+            {% if edition %}
+                <h1>Edit Edition</h1>
+            {% else %}
+                <h1>Add A New Edition</h1>
+            {% endif %}
+        </div>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                {{form.as_table}}
+            </table>
+            {% if edition %}
+                <button type="submit" class="btn-accenttwo form-btn">Update Edition</button>
+            {% else %}
+                <button type="submit" class="btn-accenttwo form-btn">Add Edition</button>
+            {% endif %}
+        </form>
+    </div>
 </div>
-<form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <table>
-        {{form.as_table}}
-    </table>
-    {% if edition %}
-        <button type="submit">Update Edition</button>
-    {% else %}
-        <button type="submit">Add Edition</button>
-    {% endif %}
-</form>
 {% endblock %}
