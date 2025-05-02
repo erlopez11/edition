@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Edition, Note, Ink, Paper
 from .forms import EditionForm, NoteForm
+from cloudinary.uploader import destroy
 
 def home(request):
     return render(request, 'home.html')
@@ -63,6 +64,16 @@ class EditionCreate(LoginRequiredMixin, CreateView):
 class EditionUpdate(LoginRequiredMixin, UpdateView):
     form_class = EditionForm
     model = Edition
+
+    def form_valid(self, form):
+        current_image = Edition.objects.get(id=self.get_object().pk).image
+        new_image = self.request.FILES.get('image')
+
+        if current_image and new_image:
+            public_id = current_image.public_id
+            destroy(public_id)
+        return super().form_valid(form)
+    
     
 class EditionDelete(LoginRequiredMixin, DeleteView):
     model = Edition
