@@ -6,12 +6,26 @@
 {% endblock %}
 
 {% block content %}
-<div class="note-form-header">
-    <h1>Add A Note</h1>
+<div  class="form-container">
+    <div class="form-info">
+        <div class="form-header">
+            {% if note %}
+                <h1>Edit Note</h1>
+            {% else %}
+                <h1>Add A Note</h1>
+            {% endif %}
+        </div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table>
+                {{form.as_table}}
+            </table>
+            {% if note %}
+                <button type="submit" class="btn-accenttwo form-btn">Update Note</button>
+            {% else %}
+                <button type="submit" class="btn-accenttwo form-btn">Add Note</button>
+            {% endif %}
+        </form>
+    </div>
 </div>
-<form action="" method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">Add Note</button>
-</form>
 {% endblock %}

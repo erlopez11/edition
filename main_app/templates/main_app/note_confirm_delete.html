@@ -6,15 +6,17 @@
 {% endblock %}
 
 {% block content %}
-<div class="delete-header">
-    <h1>Delete Note?</h1>
-</div>
-<div class="confirm-container">
-    <h2>Are you sure you want to delete this note?</h2>
-    <form action="" method="POST">
-        {% csrf_token %}
-        <a href="{% url "edition_detail" note.edition.id %}">Cancel</a>
-        <button type="submit">Delete Note from {{note.note_date}}</button>
-    </form>
+<div class="confirm-container container-max-width">
+    <div class="delete-header">
+        <h1>Delete Note?</h1>
+    </div>
+    <div class="confirm-content">
+        <h2>Are you sure you want to delete this note?</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <a href="{% url "edition_detail" note.edition.id %}" class="cancel-btn btn-accentone">Cancel</a>
+            <button type="submit" class="btn-accenttwo delete-btn">Delete Note from {{note.note_date}}</button>
+        </form>
+    </div>
 </div>
 {% endblock %}
