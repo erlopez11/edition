@@ -50,7 +50,6 @@ class  EditionDetail(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['ink_list'] = inks_available
         context['paper_list'] = paper_available
-        print(context)
         return context
 
 class EditionCreate(LoginRequiredMixin, CreateView):
