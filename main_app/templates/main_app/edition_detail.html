@@ -2,134 +2,116 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" href="css/editions/edition-detail.css">
+<link rel="stylesheet" href="{% static "css/editions/edition-detail.css" %}">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=delete,edit" />
+<script defer src="{% static "/js/overlay.js" %}"></script>
 {% endblock %}
 
 {% block content %}
-<section class="edition-detail">
+<section class="edition-detail container-max-width">
     <div class="edition-img">
         {% load cloudinary %}
-        {% cloudinary edition.image width=200 height=200 %}
+        {% cloudinary edition.image quality="auto" width=300 height=300 crop="auto" %}
     </div>
     <div class="edition-text">
         <div class="text-header">
-            <h1>{{edition.edition_name}}</h1>
-            <p><span>Edition Status:</span>{{edition.get_status_display}}</p>
+            <div class="edition-headings">
+                <h1>{{edition.edition_name}}</h1>
+                <p class='edition-status'>{{edition.get_status_display}}</p>
+            </div>
             <div class="edition-actions">
-                <a href="{% url "edition_update" edition.id %}">Edit Edition</a>
-                <a href="{% url "edition_delete" edition.id %}">Delete Edition</a>
+                <a href="{% url "edition_update" edition.id %} " class="btn-accentone edition-edit">Edit Edition</a>
+                <a href="{% url "edition_delete" edition.id %}" class="btn-accenttwo edition-delete">Delete Edition</a>
             </div>
         </div>
-        <hr class="detail-divider">
+        <hr class="divider">
         <div class="text-detail">
-            <p><span>Date:</span>{{edition.year}}</p>
-            <p><span>Technique:</span>{{edition.get_technique_display}}</p>
-            <p><span>Edition Type:</span>{{edition.get_edition_type_display}}</p>
-            <p><span>Edition Size:</span>{{edition.edition_size}}</p>
-            <p><span>Available Prints:</span>{{edition.available_prints}}</p>
+            <div class="main-details">
+                <p><span class="bold">Date:</span> {{edition.year}}</p>
+                <p><span class="bold">Technique:</span> {{edition.get_technique_display}}</p>
+                <p><span class="bold">Edition Type:</span> {{edition.get_edition_type_display}}</p>
+                <p><span class="bold">Edition Size:</span> {{edition.edition_size}}</p>
+                <p><span class="bold">Available Prints:</span> {{edition.available_prints}}</p>
+            </div>
+            <div class="additional-details">
+                <p><span class="bold">Paper Size:</span>{{edition.paper_size}}</p>
+                <p><span class="bold">Plate Size:</span>{{edition.plate_size}}</p>
+                <p><span class="bold">Margin-Upper:</span>{{edition.margin_upper}}</p>
+                <p><span class="bold">Margin-Lower:</span>{{edition.margin_lower}}</p>
+                <p><span class="bold">Margin-Sides:</span>{{edition.margin_sides}}</p>
+            </div>
         </div>
     </div>
 </section>
-<section class="addition-details">
-    <p><span>Paper Size:</span>{{edition.paper_size}}</p>
-    <p><span>Plate Size:</span>{{edition.plate_size}}</p>
-    <p><span>Margin-Upper:</span>{{edition.margin_upper}}</p>
-    <p><span>Margin-Lower:</span>{{edition.margin_lower}}</p>
-    <p><span>Margin-Sides:</span>{{edition.margin_sides}}</p>
-
-</section>
-<section class="edition-ink">
-    <h2>Inks</h2>
-    <div class="inks">
-        <div class="inks-added">
-            {% if edition.ink.count %}
-                {% for ink in edition.ink.all %}
-                    <div class="ink-container">
-                        <h3>{{ink.ink_color}} {{ink.ink_name}} Ink</h3>
-                        <form action="{% url "remove_ink" edition.id ink.id%}" method="POST">
-                            {% csrf_token %}
-                            <button type="submit">
-                                <span class="material-symbols-outlined">delete</span>
-                            </button>
-                        </form>
-                    </div>
-                {% endfor %}
-            {% else %}
-            <p>{{edition.edition_name}} doesn't have inks yet.</p>
-            {% endif %}
+<hr class="divider container-max-width">
+<div class="ink-paper-section container-max-width">
+    <section class="edition-ink">
+        <div class="ink-header">
+            <h2>Inks</h2>
+            <button id="add-ink-btn" class="btn-accenttwo">Add Ink</button>
         </div>
-        <div class="inks-available">
-            {% if ink_list.count %}
-                {% for ink in ink_list.all  %}
-                    <div class='ink-container'>
-                        <h3>{{ink.ink_color}} {{ink.ink_name}} Ink</h3>
-                        <form action="{% url "associate_ink" edition.id ink.id%}" method="POST">
-                            {% csrf_token %}
-                            <button type="submit">Add Ink to Edition</button>
-                        </form>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>All available inks have been added.</p>
-            {% endif %}
+        <div class="inks">
+            <div class="inks-added">
+                {% if edition.ink.count %}
+                    {% for ink in edition.ink.all %}
+                        <div class="ink-container">
+                            <h3>{{ink.ink_color}} {{ink.ink_name}} Ink</h3>
+                            <form action="{% url "remove_ink" edition.id ink.id%}" method="POST">
+                                {% csrf_token %}
+                                <button class="remove-ink-btn" type="submit">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </form>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                <p>{{edition.edition_name}} doesn't have inks yet.</p>
+                {% endif %}
+            </div>
         </div>
-    </div>
-</section>
-<section class="edition-paper">
-    <h2>Paper</h2>
-    <div class="papers">
-        <div class="papers-added">
-            {% if edition.paper.count %}
-                {% for paper in edition.paper.all  %}
-                    <div class="paper-container">
-                        <h3>{{paper.paper_color}} {{paper.paper_name}}</h3>
-                        <form action="{% url "remove_paper" edition.id paper.id %}" method="POST">
-                            {% csrf_token %}
-                            <button type="submit">
-                                <span class="material-symbols-outlined">delete</span>
-                            </button>
-                        </form>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>{{edition.edition_name}} doesn't have paper yet.</p>
-            {% endif %}
+    </section>
+    <section class="edition-paper">
+        <div class="paper-header">
+            <h2>Paper</h2>
+            <button id="add-paper-btn" class="btn-accenttwo">Add Paper</button>
         </div>
-        <div class="paper-available">
-            {% if paper_list.count %}
-                {% for paper in paper_list.all  %}
-                    <div class="paper-container">
-                        <h3>{{paper.paper_color}} {{paper.paper_name}}</h3>
-                        <form action="{% url "associate_paper" edition.id paper.id %}" method="POST">
-                            {% csrf_token %}
-                            <button type="submit">Add Paper to Edition</button>
-                        </form>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>All available paper has been added.</p>
-            {% endif %}
+        <div class="papers">
+            <div class="papers-added">
+                {% if edition.paper.count %}
+                    {% for paper in edition.paper.all  %}
+                        <div class="paper-container">
+                            <h3>{{paper.paper_color}} {{paper.paper_name}}</h3>
+                            <form action="{% url "remove_paper" edition.id paper.id %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="remove-paper-btn">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </form>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>{{edition.edition_name}} doesn't have paper yet.</p>
+                {% endif %}
+            </div>
         </div>
-
-    </div>
-</section>
-<section class="edition-notes">
-    <div clsas="notes-header">
+    </section>
+</div>
+<section class="edition-notes container-max-width">
+    <div class="notes-header">
         <h2>Notes</h2>
-        <a href="{% url "note_create" edition.id %}">Add Note</a>
+        <a href="{% url "note_create" edition.id %}" class="btn-accenttwo add-note-btn">Add Note</a>
     </div>
     <div class="notes">
         {% for note in edition.note_set.all %}
             <div class="note-card">
-                <h3>Date: {{note.note_date}}</h3>
+                <h3>{{note.note_date}}</h3>
                 <div class="note-text">{{note.notes}}</div>
                 <div class="note-actions">
-                    <a href="{% url "note_update" edition.id note.id %}">
+                    <a class="note-btns" href="{% url "note_update" edition.id note.id %}">
                         <span class="material-symbols-outlined">edit</span>
                         <span>Edit</span>
                     </a>
-                    <a href="{% url "note_delete" edition.id note.id%}">
+                    <a class="note-btns" href="{% url "note_delete" edition.id note.id%}">
                         <span class="material-symbols-outlined">delete</span>
                         <span>Delete</span>
                     </a>
@@ -138,4 +120,46 @@
         {% endfor %}
     </div>
 </section>
+{% endblock %}
+
+{% block overlay %}
+<div id="ink-overlay">
+    <div class="inks-available">
+        <h2>Available Inks</h2>
+        {% if ink_list.count %}
+            {% for ink in ink_list.all  %}
+                <div>
+                    <h3>{{ink.ink_color}} {{ink.ink_name}} Ink</h3>
+                    <form action="{% url "associate_ink" edition.id ink.id%}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-accentone add-btn">Add Ink to Edition</button>
+                    </form>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>All available inks have been added.</p>
+        {% endif %}
+        <button id='overlay-close'></button>
+    </div>
+</div>
+<div id="paper-overlay">
+    <div class="paper-available">
+        <h2>Paper Available</h2>
+        {% if paper_list.count %}
+            {% for paper in paper_list.all  %}
+                <div>
+                    <h3>{{paper.paper_color}} {{paper.paper_name}}</h3>
+                    <form action="{% url "associate_paper" edition.id paper.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-accentone add-btn">Add Paper to Edition</button>
+                    </form>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>All available paper has been added.</p>
+        {% endif %}
+        <button id='paper-overlay-close'></button>
+    </div>
+
+</div>
 {% endblock %}
