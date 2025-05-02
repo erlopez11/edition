@@ -72,8 +72,10 @@ header h2 {
 
 .btn-accentone {
     background-color: var(--clr-accentOne);
+    border: none;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     color: var(--clr-light);
+    font-size: 13px;
     border-radius: 10px;
     transition: 0.5s;
 }
@@ -84,14 +86,25 @@ header h2 {
 
 .btn-accenttwo {
     background-color: var(--clr-accentTwo);
+    border: none;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     color: var(--clr-light);
+    font-size: 13px;
     border-radius: 10px;
     transition: 0.5s;
 }
 
 .btn-accenttwo:hover {
     background-color: var(--clr-btnhoverTwo);
+}
+
+.divider {
+    border-top: 2px solid var(--clr-accentTwo-Faded);
+    border-radius: 10px;
+}
+
+.bold {
+    font-weight: 500;
 }
 
 /* --------------- */
