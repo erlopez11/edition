@@ -1,0 +1,53 @@
+.delete-header  h1{
+    font-family: var(--ff-heading);
+    font-size: 40px;
+}
+
+.confirm-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.confirm-content {
+    margin-top: 40px;
+}
+
+.confirm-content form {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.cancel-btn {
+    border: 1px solid var(--clr-accentOne);
+    background: transparent;
+    color: var(--clr-accentOne);
+    box-shadow: none;
+    padding: 8px 20px;
+}
+
+.cancel-btn:hover {
+    color: var(--clr-light);
+}
+
+.delete-btn {
+    padding: 8px 20px;
+}
+/* --------------- */
+/*  Media Queries  */
+/* --------------- */
+
+@media (max-width: 559px) {
+    main {
+        height: calc(100vh - 54px);
+    }
+}
+
+@media (min-width: 560px) {
+    main {
+        height: calc(100vh - 71.5px);
+    }
+}

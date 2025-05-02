@@ -2,19 +2,21 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static "confirm-delete.css" %}">
+<link rel="stylesheet" href="{% static "css/confirm-delete.css" %}">
 {% endblock %}
 
 {% block content %}
-<div class="delete-header">
-    <h1>Delete {{paper.paper_name}}</h1>
-    <div class="confirm-container">
-        <h2>Are you sure you want to delete {{paper.paper_name}} in {{paper.paper_color}}?</h2>
-        <form action="" method="POST">
-            {% csrf_token %}
-            <a href="{% url "paper_index" %}">Cancel</a>
-            <button type="submit">Delete {{paper.paper_name}}</button>
-        </form>
+<div class="confirm-container container-max-width">
+    <div class="delete-header">
+        <h1>Delete {{paper.paper_name}}</h1>
     </div>
+        <div class="confirm-content">
+            <h2>Are you sure you want to delete {{paper.paper_name}} in {{paper.paper_color}}?</h2>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <a href="{% url "paper_index" %}" class="cancel-btn btn-accentone">Cancel</a>
+                <button type="submit" class="btn-accenttwo delete-btn">Delete {{paper.paper_name}}</button>
+            </form>
+        </div>
 </div>
 {% endblock %}

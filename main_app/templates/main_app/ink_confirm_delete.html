@@ -2,16 +2,21 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" href="css/confirm-delete.css">
+<link rel="stylesheet" href="{% static "css/confirm-delete.css" %}">
 {% endblock %}
 
 {% block content %}
-<div class="delete-header">
-    <h1>Delete {{ink.ink.color}} {{ink.ink_name}} ink?</h1>
+<div class="confirm-container container-max-width">
+    <div class="delete-header">
+        <h1>Delete {{ink.ink.color}} {{ink.ink_name}} ink?</h1>
+    </div>
+    <div class="confirm-content">
+        <h2>Are you sure you want to delete {{edition.edition_name}}?</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <a href="{% url "inks_index" %}" class="cancel-btn btn-accentone">Cancel</a>
+            <button type="submit" class="btn-accenttwo delete-btn">Delete Ink</button>
+        </form>
+    </div>
 </div>
-<form action="" method="POST">
-    {% csrf_token %}
-    <a href="{% url "inks_index" %}">Cancel</a>
-    <button type="submit">Delete Ink</button>
-</form>
 {% endblock %}
