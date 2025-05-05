@@ -9,6 +9,10 @@
 <section class='home-text container-max-width'>
     <h1>Ink <br> Print <br> Archive.</h1>
     <p>Edition is an all in one print edition manager designed for all printmakers. Let edition help you keep track of all your print editoins in one place. So you can focus on creating, inking, and printing.</p>
-    <a href="{% url "signup" %}" class="btn-accentone home-btn">Join Edition</a>
+    {% if user.is_authenticated %}
+        <a href="{% url "editions_index" %}" class="btn-accentone home-btn">View Editions</a>
+    {% else %}
+        <a href="{% url "signup" %}" class="btn-accentone home-btn">Join Edition</a>
+    {% endif %}
 </section>
 {% endblock %}
