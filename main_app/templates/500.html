@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static "css/error.css" %}">
+{% endblock %}
+
+{% block content %}
+<h1>Opps!</h1>
+<h2>Your image file is too large.</h2>
+{% endblock %}
