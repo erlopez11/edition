@@ -1,16 +1,25 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static "css/auth.css" %}">
+{% endblock %}
+
+
 {% block content %}
-<section>
-    <h1>Sign Up</h1>
-    {% if error_message %}
-         <p>{{error_message}}</p>
-    {% endif %}
-    <form action="{% url "signup" %}" method="post" >
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Login</button>
-    </form>
+<section class="auth-container">
+    <div class="auth-header">
+        <h1>Sign Up</h1>
+    </div>
+    <div class="auth-info">
+        {% if error_message %}
+             <p class="error-msg">{{error_message}}</p>
+        {% endif %}
+        <form action="{% url "signup" %}" method="post" >
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn-accenttwo auth-btn">Sign Up</button>
+        </form>
+    </div>
 </section>
 {% endblock %}
