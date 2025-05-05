@@ -26,5 +26,6 @@ urlpatterns = [
     path('papers/update_paper/<int:pk>/', views.PaperUpdate.as_view(), name='paper_update'),
     path('editions/<int:edition_id>/associate_paper/<int:paper_id>/', views.associate_paper, name='associate_paper'),
     path('editions/<int:edition_id>/remove_paper/<int:paper_id>/', views.remove_paper, name='remove_paper'),
+    path('archive/', views.archive_list, name='archive_list'),
 ]
 

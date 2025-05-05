@@ -38,8 +38,16 @@ def about(request):
 class EditionsList(LoginRequiredMixin, ListView):
     model = Edition
     def get_queryset(self):
-        return Edition.objects.filter(user=self.request.user)
-    
+        editions = Edition.objects.filter(user=self.request.user)
+        return editions.exclude(status = 'a')
+
+@login_required
+def archive_list(request):
+    editions = Edition.objects.filter(user=request.user)
+    archive = editions.filter(status='a')
+    return render(request, 'editions/archive_list.html', {
+        'archive' : archive
+    })
 
 class  EditionDetail(LoginRequiredMixin, DetailView):
     model = Edition
