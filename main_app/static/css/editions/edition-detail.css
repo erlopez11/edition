@@ -71,7 +71,8 @@
   transition: 0.5s;
 }
 
-.remove-ink-btn:hover {
+.remove-ink-btn:hover,
+.remove-paper-btn:hover{
   color: var(--clr-light);
 }
 
