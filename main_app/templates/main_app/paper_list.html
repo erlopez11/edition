@@ -17,11 +17,14 @@
         {% for paper in paper_list  %}
             <div class="material-card">
                 <div class="material-card-content">
+                    {% if paper.paper_qty <= 5 %}
+                        <p class="qty-msg">Low Paper</p>
+                    {% endif %}
                     <h2>{{paper.paper_name}}</h2>
                     <h3>{{paper.paper_color}}</h3>
-                    <p><span>Paper Size:</span>{{paper.paper_size}}</p>
-                    <p><span>Paper Weight:</span>{{paper.paper_weight}}</p>
-                    <p><span>Paper Quantity</span>{{paper.paper_qty}}</p>
+                    <p><span class="bold">Paper Size:</span>{{paper.paper_size}}</p>
+                    <p><span class="bold">Paper Weight:</span>{{paper.paper_weight}}</p>
+                    <p><span class="bold">Paper Quantity:</span>{{paper.paper_qty}}</p>
                     <div class="material-actions">
                         <a class="material-btns" href="{% url "paper_update" paper.id %}">
                             <span class="material-symbols-outlined">edit</span> 

@@ -74,6 +74,14 @@
     padding-bottom: 50px;
 }
 
+.qty-msg {
+    background-color: var(--clr-accentTwo);
+    color: var(--clr-light);
+    font-size: 12px;
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+
 @media (max-width: 559px) {
     main {
         height: calc(100vh - 54px);

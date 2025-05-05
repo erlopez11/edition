@@ -17,11 +17,14 @@
         {% for ink in ink_list  %}
             <div class="material-card">
                 <div class="material-card-content">
+                    {% if ink.ink_qty <= 1 %}
+                        <p class="qty-msg">Low Ink</p>
+                    {% endif %}
                     <h2>{{ink.ink_name}}</h2>
                     <h3>{{ink.ink_color}}</h3>
-                    <p><span>Ink Type:</span>{{ink.get_ink_type_display}}</p>
-                    <p><span>Ink Base:</span>{{ink.get_ink_based_display}}</p>
-                    <p><span>Ink Quantity:</span>{{ink.ink_qty}}</p>
+                    <p><span class="bold">Ink Type:</span>{{ink.get_ink_type_display}}</p>
+                    <p><span class="bold">Ink Base:</span>{{ink.get_ink_based_display}}</p>
+                    <p><span class="bold">Ink Quantity:</span>{{ink.ink_qty}}</p>
                     <div class="material-actions">
                         <a class="material-btns" href="{% url "ink_update" ink.id %}">
                             <span class="material-symbols-outlined">edit</span> 
