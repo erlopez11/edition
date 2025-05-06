@@ -1,7 +1,8 @@
 main {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    --max-width: 1110px;
+    --container-padding: 1.5rem;
+    width: min(var(--max-width), 100% - var(--container-padding) * 2);
+    margin-inline: auto;
 }
 
 .home-text {
@@ -11,7 +12,7 @@ main {
     gap: 40px;
 }
 
-.home-text h1{
+.home-text h1 {
     font-family: var(--ff-heading);
     font-size: 40px;
 }
@@ -20,6 +21,10 @@ main {
     padding: 14px 20px;
 }
 
+.home-image-container {
+    display: flex;
+    justify-content: center;
+}
 
 /* --------------- */
 /*  Media Queries  */
@@ -29,10 +34,20 @@ main {
     main {
         height: calc(100vh - 54px);
     }
+    .home-image-container {
+        padding-top: 40px;
+    }
+    .home-text {
+        padding-bottom: 50px;
+    }
 }
 
 @media (min-width: 560px) {
     main {
         height: calc(100vh - 71.5px);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 50px;
     }
 }

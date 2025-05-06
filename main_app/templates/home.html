@@ -6,7 +6,10 @@
 {% endblock %}
 
 {% block content %}
-<section class='home-text container-max-width'>
+<div class="home-image-container">
+    <img src="{% static "images/lino_tools1.png" %}" class="home-img" alt="">
+</div>
+<section class='home-text'>
     <h1>Ink <br> Print <br> Archive.</h1>
     <p>Edition is an all in one print edition manager designed for all printmakers. Let edition help you keep track of all your print editoins in one place. So you can focus on creating, inking, and printing.</p>
     {% if user.is_authenticated %}
