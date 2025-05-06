@@ -7,6 +7,9 @@
 
 {% block content %}
 <section class="about-hero container-max-width">
+    <div class="about-img-container">
+        <img class="about-img" src="{% static "images/intaglio_tools.png" %}" alt="intaglio tools">
+    </div>
     <div class="hero-text">
         <h1>Edition</h1>
         <h3>A Printmaker's Archive</h3>
@@ -18,21 +21,18 @@
     <h2>Edition's Features</h2>
     <ul>
         <li>
+            <img src="{% static "images/brayer.png" %}" alt="brayer">
             <p> Organize important edition information</p>
         </li>
         <li>
+            <img src="{% static "images/baren.png" %}" alt="baren">
             <p>Keep track of ink and paper collections</p>
         </li>
         <li>
+            <img src="{% static "images/squeege.png" %}" alt="squeegee">
             <p>View all your editions in on place</p>
         </li>
     </ul>
 </section>
-<section class="about-cta container-max-width">
-    <div class="about-cta-text">
-        <h2>Join Edition</h2>
-        <p>Join edition and start organizing your print archive today.</p>
-    </div>
-    <a href="{% url "signup" %}" class="btn-accenttwo about-btn">Get Started</a>
-</section>
+
 {% endblock %}
