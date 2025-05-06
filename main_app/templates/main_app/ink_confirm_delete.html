@@ -7,16 +7,21 @@
 
 {% block content %}
 <div class="confirm-container container-max-width">
-    <div class="delete-header">
-        <h1>Delete {{ink.ink.color}} {{ink.ink_name}} ink?</h1>
+    <div class="confirm-image">
+        <img src="{% static "images/etching_press.png" %}" alt="etching press">
     </div>
-    <div class="confirm-content">
-        <h2>Are you sure you want to delete {{edition.edition_name}}?</h2>
-        <form action="" method="POST">
-            {% csrf_token %}
-            <a href="{% url "inks_index" %}" class="cancel-btn btn-accentone">Cancel</a>
-            <button type="submit" class="btn-accenttwo delete-btn">Delete Ink</button>
-        </form>
+    <div class="confirm-text">
+        <div class="delete-header">
+            <h1>Delete {{ink.ink.color}} {{ink.ink_name}} ink?</h1>
+        </div>
+        <div class="confirm-content">
+            <h2>Are you sure you want to delete {{edition.edition_name}}?</h2>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <a href="{% url "inks_index" %}" class="cancel-btn btn-accentone">Cancel</a>
+                <button type="submit" class="btn-accenttwo delete-btn">Delete Ink</button>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}

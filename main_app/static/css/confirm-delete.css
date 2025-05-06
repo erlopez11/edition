@@ -5,13 +5,20 @@
 
 .confirm-container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
     margin-top: 40px;
 }
 
 .confirm-content {
     margin-top: 40px;
+}
+
+.confirm-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .confirm-content form {
@@ -35,6 +42,10 @@
 
 .delete-btn {
     padding: 8px 20px;
+}
+
+.confirm-image {
+    width: 50%;
 }
 /* --------------- */
 /*  Media Queries  */

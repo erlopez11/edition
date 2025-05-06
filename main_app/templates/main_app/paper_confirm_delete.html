@@ -7,9 +7,13 @@
 
 {% block content %}
 <div class="confirm-container container-max-width">
-    <div class="delete-header">
-        <h1>Delete {{paper.paper_name}}</h1>
+    <div class="confirm-image">
+        <img src="{% static "images/etching_press.png" %}" alt="etching press">
     </div>
+    <div class="confirm-text">
+        <div class="delete-header">
+            <h1>Delete {{paper.paper_name}}</h1>
+        </div>
         <div class="confirm-content">
             <h2>Are you sure you want to delete {{paper.paper_name}} in {{paper.paper_color}}?</h2>
             <form action="" method="POST">
@@ -18,5 +22,6 @@
                 <button type="submit" class="btn-accenttwo delete-btn">Delete {{paper.paper_name}}</button>
             </form>
         </div>
+    </div>
 </div>
 {% endblock %}
