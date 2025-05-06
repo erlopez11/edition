@@ -6,6 +6,13 @@
 {% endblock %}
 
 {% block content %}
-<h1>Opps!</h1>
-<h2>Your image file is too large.</h2>
+<div class="error-content">
+    <div class="error-image">
+        <img src="{% static "images/screenprint.png" %}" alt="screenprint screen and squeegee">
+    </div>
+    <div class="error-text">
+        <h1>Opps!</h1>
+        <h2>There was a problem uploading your image, please try again.</h2>
+    </div>
+</div>
 {% endblock %}

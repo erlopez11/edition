@@ -6,6 +6,13 @@
 {% endblock %}
 
 {% block content %}
-<h1>Opps!</h1>
-<h2>This page does not exist.</h2>
+<div class="error-content">
+    <div class="error-image">
+        <img src="{% static "images/screenprint.png" %}" alt="screenprint screen and squeegee">
+    </div>
+    <div class="error-text">
+        <h1>Opps!</h1>
+        <h2>Page not found.</h2>
+    </div>
+</div>
 {% endblock %}
