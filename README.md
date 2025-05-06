@@ -1,10 +1,10 @@
 ![Edition Homepage](https://github.com/user-attachments/assets/889c66e7-0800-4b78-8778-a0ef494e0a76)
-# 🎨Edition
+# 🎨 Edition
 Edition is an print collection app designed for printmakers to manage and keep track of their print editions, ink, and paper.
 
 [Edition Deployment](https://edition-app-e049b9671da1.herokuapp.com/)
 
-## 👩🏻‍🎨Description
+## 👩🏻‍🎨 Description
 **Tech Used:** Pyhton, Django, PostgreSQL, CSS, Javascript
 
 **API:** Cloudinary
